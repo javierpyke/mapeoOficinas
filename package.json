@@ -1,0 +1,23 @@
+{
+  "name": "mapeooficinas",
+  "version": "1.0.0",
+  "description": "Se requiere hacer un sistema que lleve el control de los centros de toma del Registro Nacional de las Personas. Los centros pueden ser propios o pertenecientes a Anses, la única diferencia es que en los centros propios hay una conexión a internet con un proveedor (razón social, cuit, teléfono de soporte técnico y número de referencia del centro) varios centros pueden tener el mismo proveedor lo unico q cambiaria seria el numero de referencia.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javierpyke/mapeoOficinas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javierpyke/mapeoOficinas/issues"
+  },
+  "homepage": "https://github.com/javierpyke/mapeoOficinas#readme",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}
