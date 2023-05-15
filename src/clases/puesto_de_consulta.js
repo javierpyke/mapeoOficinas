@@ -1,3 +1,5 @@
+const TiposDeEquipos = require("../tipos/tiposDeEquipos")
+
 class PuestoDeConsulta{
     constructor(numeroDePuesto){
         this.numeroDePuesto = numeroDePuesto
@@ -5,33 +7,57 @@ class PuestoDeConsulta{
     }
 
     setTeclado(teclado){
-        if(teclado.tipoDeEquipo === 'teclado'){
+        if(!this.teclado && teclado.tipoDeEquipo === TiposDeEquipos.Teclado){
             this.teclado = teclado
         }        
     }
 
+    getTeclado(){
+        return this.teclado
+    }
+
     setMouse(mouse){
-        this.mouse = mouse
+        if(mouse.tipoDeEquipo === TiposDeEquipos.Mouse){
+            this.mouse = mouse
+        }   
+    }
+
+    getMouse(){
+        return this.mouse
     }
 
     setCpu(cpu){
-        this.cpu = cpu
+        if(cpu.tipoDeEquipo === TiposDeEquipos.Cpu){
+            this.cpu = cpu
+        }   
+    }
+
+    getCpu(){
+        return this.cpu
     }
 
     setMonitor(monitor){
-        this.monitor = monitor
+        if(monitor.tipoDeEquipo === TiposDeEquipos.Monitor){
+            this.monitor = monitor
+        }   
+    }
+
+    getMonitor(){
+        return this.monitor
     }
 
     habilitar(){
-        console.log('ok')
         if(this.mouse && this.cpu && this.monitor && this.teclado){
-            console.log('ok2')
             this.habilitado = true
         }
     }
 
     estaHabilitado(){
         return this.habilitado
+    }
+
+    getNumeroDePuesto(){
+        return this.numeroDePuesto
     }
 
 }
