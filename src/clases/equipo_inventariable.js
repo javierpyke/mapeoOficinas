@@ -1,8 +1,8 @@
 const Equipo = require('./equipo.js')
 
 class EquipoInventariable extends Equipo{
-    constructor(arca,modelo,tipoDeEquipo,inventario){
-        super(arca,modelo,tipoDeEquipo);
+    constructor(marca,modelo,tipoDeEquipo,inventario){
+        super(marca,modelo,tipoDeEquipo);
         this.inventario = inventario
     }
 
