@@ -1,3 +1,5 @@
+const Centro = require('./centro.js')
+
 class CentroAnses extends Centro {
     constructor(){
         super()
