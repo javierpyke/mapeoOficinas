@@ -1,8 +1,8 @@
 const TiposDeEquipos = require("../tipos/tiposDeEquipos")
 
 class PuestoDeConsulta{
-    constructor(numeroDePuesto){
-        this.numeroDePuesto = numeroDePuesto
+    constructor(){
+        //this.numeroDePuesto = numeroDePuesto
         this.habilitado = false
     }
 
@@ -59,6 +59,39 @@ class PuestoDeConsulta{
     getNumeroDePuesto(){
         return this.numeroDePuesto
     }
+
+    eliminarTeclado(){
+        var teclado = this.teclado
+        this.teclado = null
+        this.habilitado = false
+
+        return teclado
+    }
+
+    eliminarMonitor(){
+        var monitor = this.monitor
+        this.monitor = null
+        this.habilitado = false
+
+        return monitor
+    }
+
+    eliminarMouse(){
+        var mouse = this.mouse
+        this.mouse = null
+        this.habilitado = false
+
+        return mouse
+    }
+
+    eliminarCpu(){
+        var cpu = this.cpu
+        this.cpu = null
+        this.habilitado = false
+
+        return cpu
+    }
+
 
 }
 
