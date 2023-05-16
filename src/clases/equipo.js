@@ -21,6 +21,11 @@ class Equipo{
     getTipoDeEquipo(){
         return this.tipoDeEquipo
     }
+
+    cambiarEstado(){
+        this.funcionando = !this.funcionando
+    }
+    
 }
 
 module.exports = Equipo;
