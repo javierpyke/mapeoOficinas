@@ -10,6 +10,8 @@ class EquipoInventariable extends Equipo{
         return this.inventario
     }
 
+    
+
 }
 
 module.exports = EquipoInventariable;
