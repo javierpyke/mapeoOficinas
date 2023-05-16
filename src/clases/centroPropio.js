@@ -1,10 +1,14 @@
+const Centro = require('./centro.js')
+
 class CentroPropio extends Centro {
     constructor(){
         super()
     }
 
     setConexion(conexion){
-        this.conexion = conexion
+        if(!this.conexion){
+            this.conexion = conexion
+        }        
     }
 
     getConexion(){
