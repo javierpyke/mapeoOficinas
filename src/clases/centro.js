@@ -28,7 +28,11 @@ class Centro{
         return this.numeroDeCentro
     }
 
-    agregarPuesto(){
+    getPuesto(numeroDePuesto){
+        return this.puestos[numeroDePuesto-1]
+    }
+
+    crearPuesto(){
         this.puestos.push(new PuestoDeConsulta())
     }
 
