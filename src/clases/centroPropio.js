@@ -1,8 +1,8 @@
 const Centro = require('./centro.js')
 
 class CentroPropio extends Centro {
-    constructor(){
-        super()
+    constructor(direccion,numeroDeCentro){
+        super(direccion,numeroDeCentro)
     }
 
     setConexion(conexion){
