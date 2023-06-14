@@ -14,5 +14,4 @@ node_modules
 .sass-cache
 
 # Pagina de pruebas
-pruebas.js
-prueba2.js
+prueba*.js
