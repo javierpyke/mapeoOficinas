@@ -3,7 +3,7 @@ const { MongoClient } = require('mongodb')
 module.exports = class MongoDBDao {
   constructor(collection) {
 
-        const url = 'mongodb+srv://javier:javier77@cluster0.samd2iu.mongodb.net/?retryWrites=true&w=majority'
+        const url = 'url'
         this.client = new MongoClient(url)
 
         // Database Name
