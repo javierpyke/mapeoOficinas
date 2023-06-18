@@ -1,9 +1,9 @@
 const { MongoClient } = require('mongodb')
+const urlMongo = require('./claves')
 
 module.exports = class MongoDBDao {
   constructor(collection) {
-
-        const url = 'url'
+        const url = urlMongo
         this.client = new MongoClient(url)
 
         // Database Name
