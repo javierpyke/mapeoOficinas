@@ -1,12 +1,14 @@
 class Proveedor{
     constructor(razonSocial, cuit, telefonoSoporte){
-        this.razonSocial = razonSocial
-        this.cuit = cuit
-        this.telefonoSoporte = telefonoSoporte
+        this.SetRazonSocial(razonSocial)
+        this.SetCuit(cuit)
+        this.SetTelefonoSoporte(telefonoSoporte)
     }
 
-    setRazonSocial(razonSocial){
-        if(!this.razonSocial){
+    SetRazonSocial(razonSocial){
+        if(!razonSocial){
+            throw new Error('Falta razon social')
+        } else {
             this.razonSocial = razonSocial
         }
     }
@@ -17,8 +19,10 @@ class Proveedor{
         return razonSocialEliminada
     }
 
-    setCuit(cuit){
-        if(!this.cuit){
+    SetCuit(cuit){
+        if(!cuit){
+            throw new Error('Falta cuit')
+        } else {
             this.cuit = cuit
         }
     }
@@ -29,8 +33,10 @@ class Proveedor{
         return cuitEliminado
     }
 
-    setTelefonoSoporte(telefonoSoporte){
-        if(!this.telefonoSoporte){
+    SetTelefonoSoporte(telefonoSoporte){
+        if(!telefonoSoporte){
+            throw new Error('Falta telefono de soporte')
+        } else {
             this.telefonoSoporte = telefonoSoporte
         }
     }

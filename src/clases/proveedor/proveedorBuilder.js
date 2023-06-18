@@ -1,6 +1,6 @@
 const Proveedor = require('./proveedor')
 
-class ProveedorBuilder{
+module.exports = class ProveedorBuilder{
     constructor(){
         this.razonSocial = null
         this.cuit = null
