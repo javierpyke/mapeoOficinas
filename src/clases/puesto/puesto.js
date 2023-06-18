@@ -1,14 +1,21 @@
-const TiposDeEquipos = require("../../tipos/tiposDeEquipos")
+const TiposDeEquipos = require("../tipos/tiposDeEquipos")
 
-class PuestoDeConsulta{
+class Puesto{
     constructor(){
         this.habilitado = false
     }
 
     setTeclado(teclado){
-        if(!this.teclado && teclado.tipoDeEquipo === TiposDeEquipos.Teclado){
+        if(this.teclado){
+            throw new Error('El puesto ya posee un teclado')
+        }
+        if(!this.teclado && teclado && teclado.tipoDeEquipo === TiposDeEquipos.Teclado){
             this.teclado = teclado
         }        
+    }
+
+    setHabilitado(habilitado){
+        this.habilitado = habilitado
     }
 
     getTeclado(){
@@ -16,7 +23,7 @@ class PuestoDeConsulta{
     }
 
     setMouse(mouse){
-        if(mouse.tipoDeEquipo === TiposDeEquipos.Mouse){
+        if(mouse && mouse.tipoDeEquipo === TiposDeEquipos.Mouse){
             this.mouse = mouse
         }   
     }
@@ -26,7 +33,7 @@ class PuestoDeConsulta{
     }
 
     setCpu(cpu){
-        if(cpu.tipoDeEquipo === TiposDeEquipos.Cpu){
+        if(cpu && cpu.tipoDeEquipo === TiposDeEquipos.Cpu){
             this.cpu = cpu
         }   
     }
@@ -36,7 +43,7 @@ class PuestoDeConsulta{
     }
 
     setMonitor(monitor){
-        if(monitor.tipoDeEquipo === TiposDeEquipos.Monitor){
+        if(monitor && monitor.tipoDeEquipo === TiposDeEquipos.Monitor){
             this.monitor = monitor
         }   
     }
@@ -51,6 +58,10 @@ class PuestoDeConsulta{
         }
     }
 
+    deshabilitar(){
+        this.habilitado = false
+    }
+
     estaHabilitado(){
         return this.habilitado
     }
@@ -60,7 +71,10 @@ class PuestoDeConsulta{
     }
 
     eliminarTeclado(){
-        var teclado = this.teclado
+        if(!this.teclado){
+            throw new Error('El puesto no posee teclado')
+        }
+        let teclado = this.teclado
         this.teclado = null
         this.habilitado = false
 
@@ -94,4 +108,4 @@ class PuestoDeConsulta{
 
 }
 
-module.exports = PuestoDeConsulta;
+module.exports = Puesto;
