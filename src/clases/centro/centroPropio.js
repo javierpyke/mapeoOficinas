@@ -8,7 +8,10 @@ class CentroPropio extends Centro {
     setConexion(conexion){
         if(!this.conexion){
             this.conexion = conexion
-        }        
+            return this
+        } else {
+            throw new Error('El centro ya posee una conexion')
+        }      
     }
 
     getConexion(){
@@ -21,6 +24,7 @@ class CentroPropio extends Centro {
 
         return conexion
     }
+
 }
 
 module.exports = CentroPropio

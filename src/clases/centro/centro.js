@@ -1,17 +1,37 @@
-const PuestoDeConsulta = require("../puesto/puestoDeConsulta");
+const PuestoDeConsulta = require("../puesto/puesto");
 
 class Centro{
     constructor(direccion,numeroDeCentro){
-        this.direccion = direccion
-        this.numeroDeCentro = numeroDeCentro
+        this.setDireccion(direccion)
+        this.setNumeroDeCentro(numeroDeCentro)
         this.puestos = []
+    }
+
+    setDireccion(direccion){
+        if(!direccion){
+            throw new Error('Falta direccion del centro')
+        } else {
+            this.direccion = direccion
+        }
+    }
+
+    
+
+    setNumeroDeCentro(numeroDeCentro){
+        if(!numeroDeCentro){
+            throw new Error('Falta el numero del centro')
+        } else {
+            this.numeroDeCentro = numeroDeCentro
+        }
     }
 
     setEncargado(encargado){
         if(!this.encargado){
             this.encargado = encargado
+            return this
+        } else {
+            throw new Error('El centro ya posee un encargado')
         }
-        return this
     }
 
     eliminarEncargado(){
@@ -48,7 +68,22 @@ class Centro{
     }
 
     agregarTeclado(teclado,numeroDePuesto){
-        this.puestos[numeroDePuesto-1].setTeclado(teclado)
+        teclado.enUso()
+        try{
+            this.puestos[numeroDePuesto-1].setTeclado(teclado)
+        }catch(e){
+            throw e
+        }
+        
+    }
+
+    quitarTeclado(numeroDePuesto){
+        try{
+            return this.puestos[numeroDePuesto-1].eliminarTeclado()
+        } catch(e){
+            throw e
+        }
+        
     }
 
     agregarMouse(mouse,numeroDePuesto){
@@ -63,6 +98,13 @@ class Centro{
         this.puestos[numeroDePuesto-1].setCpu(cpu)
     }
 
+    deshabilitarPuesto(numeroDePuesto){
+        this.puestos[numeroDePuesto-1].deshabilitar()
+    }
+
+    setPuestos(puestos){
+        this.puestos = puestos
+    }
 }
 
 module.exports = Centro;

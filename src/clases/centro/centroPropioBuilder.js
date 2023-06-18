@@ -12,9 +12,16 @@ class CentroPropioBuilder extends CentroBuilder{
         return this
     }
 
+    setPuestos(puestos){
+        this.puestos = puestos
+        return this
+    }
+
     build(){
         this.centro = new CentroPropio(this.direccion,this.numeroDeCentro)
+        this.centro.setEncargado(this.encargado)
         this.centro.setConexion(this.conexion)
+        this.centro.setPuestos(this.puestos)
         return this.centro
     }
 }
