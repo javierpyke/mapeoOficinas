@@ -1,6 +1,6 @@
 const Encargado = require('./encargado')
 
-class EncargadoBuilder{
+module.exports = class EncargadoBuilder{
     constructor(){
         this.nombre = null
         this.dni = null
@@ -9,18 +9,30 @@ class EncargadoBuilder{
     }
 
     setNombre(nombre){
-        this.nombre = nombre
-        return this
+        try{
+            this.nombre = nombre
+            return this
+        } catch(e){
+            throw e
+        }        
     }
 
     setDni(dni){
-        this.dni = dni
-        return this
+        try{
+            this.dni = dni
+            return this
+        } catch(e){
+            throw e
+        }        
     }
 
     setTelefono(telefono){
-        this.telefono = telefono
-        return this
+        try{
+            this.telefono = telefono
+            return this
+        } catch(e){
+            throw e
+        }        
     }
 
     build(){

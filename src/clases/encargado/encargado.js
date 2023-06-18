@@ -1,8 +1,32 @@
 class Encargado{
     constructor(nombre,dni,telefono){
-        this.nombre = nombre
-        this.dni = dni
-        this.telefono = telefono
+        this.setNombre(nombre)
+        this.setDni(dni)
+        this.setTelefono(telefono)
+    }
+
+    setNombre(nombre){
+        if(!nombre){
+            throw new Error('Falta el nombre del encargado')
+        } else {
+            this.nombre = nombre
+        }
+    }
+
+    setDni(dni){
+        if(!dni){
+            throw new Error('Falta el dni del encargado')
+        } else {
+            this.dni = dni
+        }
+    }
+
+    setTelefono(telefono){
+        if(!telefono){
+            throw new Error('Falta el telefono del encargado')
+        } else {
+            this.telefono = telefono
+        }
     }
 
     getNombre(){
