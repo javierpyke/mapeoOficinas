@@ -1,9 +1,9 @@
-const TiposDeEquipos = require("../../tipos/tiposDeEquipos");
+const TiposDeEquipos = require("../tipos/tiposDeEquipos");
 const Equipo = require("./equipo");
 
 class TecladoFactory{
-    crear(marca,modelo){
-        return new Equipo(marca,modelo,TiposDeEquipos.Teclado)
+    crear(marca,modelo,inventario){
+        return new Equipo(marca,modelo,TiposDeEquipos.Teclado,inventario)
     }
 }
 

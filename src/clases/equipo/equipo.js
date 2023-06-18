@@ -1,17 +1,61 @@
 class Equipo{
-    constructor(marca,modelo,tipoDeEquipo){
-        this.marca = marca
-        this.modelo = modelo
-        this.funcionando = true
-        this.tipoDeEquipo = tipoDeEquipo
+    constructor(marca,modelo,tipoDeEquipo,inventario){
+        this.setMarca(marca)
+        this.setModelo(modelo)
+        this.setTipoDeEquipo(tipoDeEquipo)
+        this.usado = false
+        this.setInventario(inventario)
+    }
+
+    setMarca(marca){
+        if(!marca){
+            throw new Error('Falta Marca');
+        } else {
+            this.marca = marca
+        }
+        
+    }
+
+    setUsado(usado){
+        this.usado = usado
+    }
+
+    enUso(){
+        this.usado = true
+    }
+
+    libre(){
+        this.usado = false
+    }
+
+    estaUsado(){
+        return this.usado
+    }
+
+    setModelo(modelo){
+        if(!modelo){
+            throw new Error('Falta Modelo');
+        } else {
+            this.modelo = modelo
+        }
+        
+    }
+
+    setTipoDeEquipo(tipoDeEquipo){
+        if(!tipoDeEquipo){
+            throw new Error('Falta Tipo De Equipo');
+        } else {
+            this.tipoDeEquipo = tipoDeEquipo
+        }
+        
+    }
+
+    setInventario(inventario){
+        this.inventario = inventario
     }
 
     getMarca(){
         return this.marca
-    }
-
-    estaFuncionando(){
-        return this.funcionando
     }
 
     getModelo(){
@@ -22,10 +66,18 @@ class Equipo{
         return this.tipoDeEquipo
     }
 
-    cambiarEstado(){
-        this.funcionando = !this.funcionando
+
+    informarEnUso(){
+        this.usado = true
+    }
+
+    informarLibre(){
+        this.usado = false
     }
     
+    getInventario(){
+        return this.inventario
+    }
 }
 
 module.exports = Equipo;

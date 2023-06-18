@@ -1,9 +1,9 @@
-const TiposDeEquipos = require("../../tipos/tiposDeEquipos");
+const TiposDeEquipos = require("../tipos/tiposDeEquipos")
 const Equipo = require("./equipo");
 
 class MouseFactory{
-    crear(marca,modelo){
-        return new Equipo(marca,modelo,TiposDeEquipos.Mouse)
+    crear(marca,modelo,inventario){
+        return new Equipo(marca,modelo,TiposDeEquipos.Mouse,inventario)
     }
 }
 
