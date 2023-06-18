@@ -1,11 +1,15 @@
 class Conexion{
     constructor(numeroDeReferencia,proveedor){
-        this.numeroDeReferencia = numeroDeReferencia
-        this.proveedor = proveedor
+        this.setNumeroDeReferencia(numeroDeReferencia)
+        this.setProveedor(proveedor)
     }
 
     setNumeroDeReferencia(numeroDeReferencia){
-        this.numeroDeReferencia = numeroDeReferencia
+        if(!numeroDeReferencia){
+            throw new Error('Falta el numero de referencia')
+        } else {
+            this.numeroDeReferencia = numeroDeReferencia
+        }
     }
 
     getNumeroDeReferencia(){
@@ -13,7 +17,11 @@ class Conexion{
     }
 
     setProveedor(proveedor){
-        this.proveedor = proveedor
+        if(!proveedor){
+            throw new Error('Falta proveedor')
+        } else {
+            this.proveedor = proveedor
+        }        
     }
 
     getProveedor(){

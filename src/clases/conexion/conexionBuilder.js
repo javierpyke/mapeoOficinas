@@ -1,22 +1,28 @@
 const Conexion = require('./conexion')
 
-class ConexionBuilder{
+module.exports = class ConexionBuilder{
     constructor(){
-        this.numeroDeRefencia = numeroDeReferencia
-        this.proveedor = proveedor
+        this.numeroDeReferencia = null
+        this.proveedor = null
         this.conexion = null
     }
 
-    setNumeroDeReferencia(numeroDeRefencia){
-        this.numeroDeRefencia = numeroDeRefencia
-
-        return this
+    setNumeroDeReferencia(numeroDeReferencia){
+        try{
+            this.numeroDeReferencia = numeroDeReferencia
+            return this
+        } catch(e){
+            throw e
+        }        
     }
 
     setProveedor(proveedor){
-        this.proveedor = proveedor
-
-        return this
+        try{
+            this.proveedor = proveedor
+            return this
+        } catch(e){
+            throw e
+        }
     }
 
     build(){
