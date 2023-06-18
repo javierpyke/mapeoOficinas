@@ -22,6 +22,7 @@ module.exports = class MongoDBDao {
       }
 
       async agregar(objeto){
+        console.log(objeto)
         await this.collection2.insertOne(objeto)
       }
 
@@ -29,14 +30,35 @@ module.exports = class MongoDBDao {
         this.client.close()
       }
     
-      async obtenerTodas() {
+      async obtenerTodos(tipoDeEquipo) {
         /*const findResult = {}
         try{
             findResult = await collection.find().toArray();
         } catch(e){
             console.log("no")
         }*/
-        const findResult = await this.collection2.find().toArray();
+        const findResult = await this.collection2.find({'tipoDeEquipo':tipoDeEquipo}).toArray();
         return findResult;
       }
+
+      async obtener(filtro) {
+        /*const findResult = {}
+        try{
+            findResult = await collection.find().toArray();
+        } catch(e){
+            console.log("no")
+        }*/
+        const findResult = await this.collection2.find(filtro).toArray();
+        return findResult[0];
+      }
+
+      async obtenerInventario(){
+        const ultimoEquipo = await this.collection2.find().sort({$natural:-1}).limit(1).toArray();
+        return ultimoEquipo[0].inventario + 1
+      }
+
+      async actualizar(llave,objeto){
+        await this.collection2.updateOne(llave,{$set:objeto})
+      }
     }
+
