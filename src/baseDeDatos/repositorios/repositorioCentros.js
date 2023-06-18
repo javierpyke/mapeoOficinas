@@ -1,4 +1,6 @@
 const MongoDBDao = require('../dao/MongoBDDAO.js')
+const ConexionBuilder = require('../../clases/conexion/conexionBuilder.js')
+const ProveedorBuilder = require('../../clases/proveedor/proveedorBuilder.js')
 
 module.exports = class RepositorioCentros {
   constructor() {
@@ -13,11 +15,19 @@ module.exports = class RepositorioCentros {
     this.almacen.desconectar()
   }
 
-  async agregarCentro(centros){
-    await this.almacen.agregar(centros)
+  async agregar(centro){
+    await this.almacen.agregar(centro)
+  }
+
+  async buscar(numeroDeCentro){
+    return await this.almacen.obtener({'numeroDeCentro':numeroDeCentro})
   }
 
   getAll() {
     return this.almacen.obtenerTodas()
+  }
+
+  async actualizar(centro){
+    return await this.almacen.actualizar({'numeroDeCentro':centro.getNumeroDeCentro()},centro)
   }
 }
