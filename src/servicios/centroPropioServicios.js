@@ -6,7 +6,6 @@ const ConexionBuilder = require('../clases/conexion/conexionBuilder')
 const ConexionServicios = require('./conexionServicios')
 const PuestoServicios = require('./puestoServicios')
 const EquipoServicios = require('./equipoServicios')
-const MouseServicios = require('./mouseServicios')
 const EncargadoServicios = require('./encargadoServicios')
 const TiposDeEquipos = require('../clases/tipos/tiposDeEquipos')
 
