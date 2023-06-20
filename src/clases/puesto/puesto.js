@@ -23,9 +23,12 @@ class Puesto{
     }
 
     setMouse(mouse){
-        if(mouse && mouse.tipoDeEquipo === TiposDeEquipos.Mouse){
+        if(this.mouse){
+            throw new Error('El puesto ya posee un mouse')
+        }
+        if(!this.mouse && mouse && mouse.tipoDeEquipo === TiposDeEquipos.Mouse){
             this.mouse = mouse
-        }   
+        }        
     }
 
     getMouse(){
@@ -33,9 +36,12 @@ class Puesto{
     }
 
     setCpu(cpu){
-        if(cpu && cpu.tipoDeEquipo === TiposDeEquipos.Cpu){
+        if(this.cpu){
+            throw new Error('El puesto ya posee un cpu')
+        }
+        if(!this.cpu && cpu && cpu.tipoDeEquipo === TiposDeEquipos.Cpu){
             this.cpu = cpu
-        }   
+        }        
     }
 
     getCpu(){
@@ -43,9 +49,12 @@ class Puesto{
     }
 
     setMonitor(monitor){
-        if(monitor && monitor.tipoDeEquipo === TiposDeEquipos.Monitor){
+        if(this.monitor){
+            throw new Error('El puesto ya posee un monitor')
+        }
+        if(!this.monitor && monitor && monitor.tipoDeEquipo === TiposDeEquipos.Monitor){
             this.monitor = monitor
-        }   
+        }        
     }
 
     getMonitor(){
@@ -55,6 +64,8 @@ class Puesto{
     habilitar(){
         if(this.mouse && this.cpu && this.monitor && this.teclado){
             this.habilitado = true
+        } else {
+            throw new Error('El puesto no contiene todos los perifericos necesarios para ser habilitado')
         }
     }
 
@@ -82,7 +93,10 @@ class Puesto{
     }
 
     eliminarMonitor(){
-        var monitor = this.monitor
+        if(!this.monitor){
+            throw new Error('El puesto no posee monitor')
+        }
+        let monitor = this.monitor
         this.monitor = null
         this.habilitado = false
 
@@ -90,7 +104,10 @@ class Puesto{
     }
 
     eliminarMouse(){
-        var mouse = this.mouse
+        if(!this.mouse){
+            throw new Error('El puesto no posee mouse')
+        }
+        let mouse = this.mouse
         this.mouse = null
         this.habilitado = false
 
@@ -98,11 +115,18 @@ class Puesto{
     }
 
     eliminarCpu(){
-        var cpu = this.cpu
+        if(!this.cpu){
+            throw new Error('El puesto no posee cpu')
+        }
+        let cpu = this.cpu
         this.cpu = null
         this.habilitado = false
 
         return cpu
+    }
+
+    getInformacion(){
+        return `${this.habilitado}`
     }
 
 

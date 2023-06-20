@@ -40,6 +40,10 @@ class Encargado{
     getTelefono(){
         return this.telefono
     }
+
+    getInformacion(){
+        return `Nombre: ${this.getNombre()} - DNI: ${this.getDni()} - Telefono: ${this.getTelefono()}`
+    }
 }
 
 module.exports = Encargado;

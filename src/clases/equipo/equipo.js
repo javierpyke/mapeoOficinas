@@ -7,6 +7,18 @@ class Equipo{
         this.setInventario(inventario)
     }
 
+    getInformacion(){
+        return `${this.getTipoDeEquipo()} - Marca: ${this.getMarca()} - Modelo: ${this.getModelo()} - Inventario: ${this.getInventario()} - Estado: ${this.estado()}`
+    }
+
+    estado(){
+        let estado = 'Libre'
+        if(this.estaUsado()){
+            estado = 'En uso'
+        }
+        return estado
+    }
+
     setMarca(marca){
         if(!marca){
             throw new Error('Falta Marca');

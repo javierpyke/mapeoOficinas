@@ -27,6 +27,10 @@ class Conexion{
     getProveedor(){
         return this.proveedor
     }
+
+    getInformacion(){
+        return `Numero de referencia: ${this.getNumeroDeReferencia()} - Proveedor: ${this.getProveedor().getInformacion()}`
+    }
 }
 
 module.exports = Conexion;
