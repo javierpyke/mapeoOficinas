@@ -1,9 +1,9 @@
-const TiposDeEquipos = require("../../tipos/tiposDeEquipos");
-const EquipoInventariable = require("./equipoInventariable");
+const TiposDeEquipos = require("../tipos/tiposDeEquipos");
+const Equipo = require("./equipo");
 
 class CpuFactory{
     crear(marca,modelo,inventario){
-        return new EquipoInventariable(marca,modelo,TiposDeEquipos.Cpu,inventario)
+        return new Equipo(marca,modelo,TiposDeEquipos.Cpu,inventario)
     }
 }
 

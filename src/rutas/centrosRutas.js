@@ -3,8 +3,8 @@ const app = express()
 const port = 3000
 const CentroServicios = require('../servicios/centroPropioServicios')
 const EquipoServicios = require('../servicios/equipoServicios')
-const MouseServicios = require('../servicios/mouseServicios')
 const EncargadoServicios = require('../servicios/encargadoServicios')
+const TiposDeEquipos = require('../clases/tipos/tiposDeEquipos')
 
 
 const agregarCentro = async (request, response) => {
@@ -38,8 +38,6 @@ const verCentro = async (request, response) => {
   const centroServicios = new CentroServicios()
   try {    
     const centro = await centroServicios.buscar(request.query.numeroDeCentro)
-    console.log(await centroServicios.buscar(request.query.numeroDeCentro))
-    console.log(centro.puestos)
     response.send(`Puesto agregado`)
   } catch(e){
     response.send(e.message)
@@ -47,21 +45,6 @@ const verCentro = async (request, response) => {
 }
 
 app.get('/centro', verCentro)
-
-const crearTeclado = async (request, response) => {
-  const equipoServicios = new EquipoServicios()
-  try {
-    const teclado = await equipoServicios.crearTeclado(request.query)
-    await equipoServicios.guardar(teclado)
-    response.send(`Teclado agregado`)
-  } catch(e){
-    response.send(e.message)
-  }
-
-  
-}
-
-app.post('/teclado', crearTeclado)
 
 const agregarEncargado = async (request, response) => {
   const centroServicios = new CentroServicios()
@@ -87,6 +70,80 @@ const eliminarEncargado = async (request, response) => {
 
 app.post('/centro/eliminarEncargado', eliminarEncargado)
 
+const crearEncargado = async (request, response) => {
+  const encargadoServicios = new EncargadoServicios()
+  try {
+    await encargadoServicios.crear(request.query)
+    await encargadoServicios.guardar()
+    response.send(`Encargado agregado`)
+  } catch(e) {
+    response.send(e.message)
+  }  
+  
+}
+
+app.post('/encargado', crearEncargado)
+
+
+/******************************* TECLADO *********************************/
+
+const obtenerTeclado = async (request, response) => {
+  const equipoServicios = new EquipoServicios()
+  try {
+    const equipo = await equipoServicios.obtenerTeclado(parseInt(request.query.numeroDeInventario))
+    response.send(`<html><body>
+                    <ul><li>${equipo.getInformacion()}</li></ul></body></htmtl>`)
+  } catch(e){
+    response.send(e.message)
+  }  
+}
+
+app.get('/teclado', obtenerTeclado)
+
+const obtenerTecladosLibres = async (request, response) => {
+  const equipoServicios = new EquipoServicios()
+  try {
+    const equipos = await equipoServicios.obtenerTecladosLibres()
+    response.send(`<html><body>
+                    <ul>${equipos.map(equipo =>
+                    `<li>${equipo.getInformacion()}</li>
+                    `)}</ul></body></htmtl>`)
+  } catch(e){
+    response.send(e.message)
+  }  
+}
+
+app.get('/tecladosLibres', obtenerTecladosLibres)
+
+const obtenerTeclados = async (request, response) => {
+  const equipoServicios = new EquipoServicios()
+  try {
+    const equipos = await equipoServicios.obtenerTeclados()
+    console.log(equipos)
+    response.send(`<html><body>
+                    <ul>${equipos.map(equipo =>
+                    `<li>${equipo.getInformacion()}</li>
+                    `)}</ul></body></htmtl>`)
+  } catch(e){
+    response.send(e.message)
+  }  
+}
+
+app.get('/teclados', obtenerTeclados)
+
+const crearTeclado = async (request, response) => {
+  const equipoServicios = new EquipoServicios()
+  try {
+    const teclado = await equipoServicios.crearTeclado(request.query)
+    await equipoServicios.guardar(teclado)
+    response.send(`Teclado creado`)
+  } catch(e){
+    response.send(e.message)
+  }  
+}
+
+app.post('/teclado', crearTeclado)
+
 const agregarTeclado = async (request, response) => {
   const centroServicios = new CentroServicios()
   try {    
@@ -111,40 +168,7 @@ const quitarTeclado = async (request, response) => {
 
 app.post('/centro/quitarTeclado', quitarTeclado)
 
-const crearMouse = async (request, response) => {
-  const mouseServicios = new MouseServicios()
-  await mouseServicios.crearMouse(request.query)
-  await mouseServicios.guardarMouse()
-  response.send(`Mouse agregado`)
-}
-
-app.post('/mouse', crearMouse)
-
-const agregarMouse = async (request, response) => {
-  const centroServicios = new CentroServicios()
-  try {    
-    await centroServicios.agregarMouse(request.query)
-    response.send(`Puesto agregado`)
-  } catch(e){
-    response.send(e.message)
-  }  
-}
-
-app.post('/centro/agregarMouse', agregarMouse)
-
-const crearEncargado = async (request, response) => {
-  const encargadoServicios = new EncargadoServicios()
-  try {
-    await encargadoServicios.crear(request.query)
-    await encargadoServicios.guardar()
-    response.send(`Encargado agregado`)
-  } catch(e) {
-    response.send(e.message)
-  }  
-  
-}
-
-app.post('/encargado', crearEncargado)
+/*************************************************************************/
 
 
 app.listen(port, () => {

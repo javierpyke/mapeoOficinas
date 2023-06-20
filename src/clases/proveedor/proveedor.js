@@ -58,6 +58,10 @@ class Proveedor{
     getTelefonoSoporte(){
         return this.telefonoSoporte
     }
+
+    getInformacion(){
+        return `Razon Social: ${this.getRazonSocial()} - CUIT: ${this.getCuit()} - Telefono Soporte: ${this.getTelefonoSoporte()}`
+    }
 }
 
 module.exports = Proveedor
