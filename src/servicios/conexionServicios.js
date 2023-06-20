@@ -13,9 +13,8 @@ module.exports = class ConexionServicios{
     async buscarProveedor(cuit){
         const repositorioProveedores = new RepositorioProveedores()
         await repositorioProveedores.conectar()
-        const proveedor = (await repositorioProveedores.buscar(cuit))[0]
+        const proveedor = (await repositorioProveedores.buscar(cuit))
         repositorioProveedores.desconectar()
-
         if(!proveedor){
             throw new Error('No existe proveedor con ese cuit')
         }
@@ -31,12 +30,37 @@ module.exports = class ConexionServicios{
         }  
     }
 
+    async obtenerConexion(numeroDeReferencia){
+        const repositorioConexiones = new RepositorioConexiones()
+        await repositorioConexiones.conectar()
+        const conexion = await repositorioConexiones.buscar(numeroDeReferencia)
+        if(!conexion){
+            throw new Error('No existe conexion con ese numero de referencia')
+        }
+        repositorioConexiones.desconectar()
+        return this.transformarJsonEnConexion(conexion)
+    }
+
+    async obtenerConexiones(){
+        const repositorioConexiones = new RepositorioConexiones()
+        await repositorioConexiones.conectar()
+        const conexiones = await repositorioConexiones.obtenerTodos()
+        repositorioConexiones.desconectar()
+        return conexiones.map(conexion => this.transformarJsonEnConexion(conexion))
+    }
+
+    
+
     transformarJsonEnConexion(datos){
-        const proveedor = (new ProveedorServicios).transformarJsonEnProveedor(datos.proveedor)
-        return (new ConexionBuilder)
-                .setNumeroDeReferencia(datos.numeroDeReferencia)
-                .setProveedor(proveedor)
-                .build()
+        if(datos){
+            const proveedor = (new ProveedorServicios).transformarJsonEnProveedor(datos.proveedor)
+            return (new ConexionBuilder)
+                    .setNumeroDeReferencia(datos.numeroDeReferencia)
+                    .setProveedor(proveedor)
+                    .build()
+        }
+        return datos
+        
     }
 
     async crear(datos){
@@ -50,7 +74,7 @@ module.exports = class ConexionServicios{
         } catch(e){
             throw e
         }
-        if(conexion.length>0){
+        if(conexion){
             throw new Error('Ya existe una conexion con ese numero de referencia')
         }
         try {

@@ -7,6 +7,14 @@ module.exports = class EncargadoServicios{
 
     }
 
+    async obtenerEncargados(){
+        const repositorioEncargados = new RepositorioEncargados()
+        await repositorioEncargados.conectar()
+        const encargados = await repositorioEncargados.obtenerTodos()
+        repositorioEncargados.desconectar()
+        return encargados.map(encargado => this.transformarJsonEnEncargado(encargado))
+    }
+
     async obtenerEncargado(dni){
         const repositorioEncargados = new RepositorioEncargados()
         await repositorioEncargados.conectar()

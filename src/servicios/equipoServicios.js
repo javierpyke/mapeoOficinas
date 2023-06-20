@@ -4,13 +4,32 @@ const TecladoFactory = require('../clases/equipo/tecladoFactory')
 const MouseFactory = require('../clases/equipo/mouseFactory')
 
 module.exports = class EquipoServicios{
-    constructor(){   
+    constructor(){
+    }
+
+    async obtenerEquipos(filtro){
+        const repositorioEquipos = new RepositorioEquipos()
+        await repositorioEquipos.conectar()
+        const equipos = await repositorioEquipos.obtenerTodos(filtro)
+        repositorioEquipos.desconectar()
+        return equipos
+    }
+
+    async obtenerTeclados(){
+        const equipos = await this.obtenerEquipos({'tipoDeEquipo':TiposDeEquipos.Teclado})
+        const teclados = equipos.map(teclado => this.transformarJsonEnTeclado(teclado))
+        return teclados
+    }
+
+    async obtenerTecladosLibres(){
+        const equipos = await this.obtenerEquipos({'tipoDeEquipo':TiposDeEquipos.Teclado,'usado':false})
+        const teclados = equipos.map(teclado => this.transformarJsonEnTeclado(teclado))
+        return teclados
     }
 
     async guardar(equipo){
         const repositorioEquipo = new RepositorioEquipos()
         await repositorioEquipo.conectar()
-        console.log(equipo)
         await repositorioEquipo.agregar(equipo)
         repositorioEquipo.desconectar()
     }
@@ -28,7 +47,6 @@ module.exports = class EquipoServicios{
         const inventario = await this.obtenerInventario()
         try {
             teclado = (new TecladoFactory).crear(datos.marca,datos.modelo,inventario)
-            console.log(teclado)
         } catch(e){
             throw e
         }        
