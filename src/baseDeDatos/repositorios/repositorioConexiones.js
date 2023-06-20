@@ -24,4 +24,8 @@ module.exports = class ConexionEncargados {
   buscar(numeroDeReferencia){
     return this.almacen.obtener({'numeroDeReferencia':numeroDeReferencia})
   }
+
+  async obtenerTodos(){
+    return await this.almacen.obtenerTodos()
+  }
 }

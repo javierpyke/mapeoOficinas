@@ -21,7 +21,12 @@ module.exports = class RepositorioProveedores {
     return this.almacen.obtenerTodos()
   }
 
-  buscar(cuit){
-    return this.almacen.obtener({'cuit':cuit})
+  async buscar(cuit){
+    return await this.almacen.obtener({'cuit':cuit})
+  }
+
+  async obtenerTodos(){
+    const proveedores = await this.almacen.obtenerTodos()
+    return proveedores
   }
 }

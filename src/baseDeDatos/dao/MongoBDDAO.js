@@ -22,7 +22,6 @@ module.exports = class MongoDBDao {
       }
 
       async agregar(objeto){
-        console.log(objeto)
         await this.collection2.insertOne(objeto)
       }
 
@@ -30,14 +29,8 @@ module.exports = class MongoDBDao {
         this.client.close()
       }
     
-      async obtenerTodos(tipoDeEquipo) {
-        /*const findResult = {}
-        try{
-            findResult = await collection.find().toArray();
-        } catch(e){
-            console.log("no")
-        }*/
-        const findResult = await this.collection2.find({'tipoDeEquipo':tipoDeEquipo}).toArray();
+      async obtenerTodos(filtro) {
+        const findResult = await this.collection2.find(filtro).toArray();
         return findResult;
       }
 

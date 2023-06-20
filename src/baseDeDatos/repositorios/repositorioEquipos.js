@@ -23,8 +23,8 @@ module.exports = class RepositorioEquipos {
     return inventario
   }
 
-  async obtenerTodos(tipoDeEquipos){
-    const equipos = await this.almacen.obtenerTodos(tipoDeEquipos)
+  async obtenerTodos(filtro){
+    const equipos = await this.almacen.obtenerTodos(filtro)
     return equipos
   }
 

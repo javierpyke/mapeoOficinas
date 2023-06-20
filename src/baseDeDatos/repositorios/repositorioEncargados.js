@@ -24,4 +24,9 @@ module.exports = class RepositorioEncargados {
   async buscar(dni){
     return await this.almacen.obtener({'dni':dni})
   }
+
+  async obtenerTodos(){
+    const encargados = await this.almacen.obtenerTodos()
+    return encargados
+  }
 }
