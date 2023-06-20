@@ -17,11 +17,17 @@ class CentroPropioBuilder extends CentroBuilder{
         return this
     }
 
+    setHabilitado(habilitado){
+        this.habilitado = habilitado
+        return this
+    }
+
     build(){
         this.centro = new CentroPropio(this.direccion,this.numeroDeCentro)
         this.centro.setEncargado(this.encargado)
         this.centro.setConexion(this.conexion)
         this.centro.setPuestos(this.puestos)
+        this.centro.setHabilitado(this.habilitado)
         return this.centro
     }
 }
