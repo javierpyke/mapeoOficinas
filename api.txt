@@ -1,0 +1,189 @@
+Crear centro - post '/centro'
+
+    {
+        numeroDeCentro
+        direccion
+        numeroDeReferenciaDeConexion
+        dniDeEncargado
+    }
+
+Ver centro - get '/centro'
+
+    {
+        numeroDeCentro
+    }
+
+
+
+/**************************** PUESTO *********************************/
+
+Agregar puesto a centro - post '/centro/agregarPuesto'
+
+    {
+        numeroDeCentro
+    }
+
+Eliminar puesto de centro - post '/centro/eliminarPuesto'
+
+    {
+        numeroDeCentro
+        numeroDePuesto
+    }
+
+Habilitar puesto - post '/centro/habilitarPuesto'
+
+    {
+        numeroDeCentro
+        numeroDePuesto
+    }
+
+Deshabilitar puesto - post '/centro/deshabilitarPuesto'
+
+    {
+        numeroDeCentro
+        numeroDePuesto
+    }
+
+/*******************************************************************/
+
+/************************* ENCARGADO *******************************/
+
+Ver encargado - get '/encargado'
+
+    {
+        dni
+    }
+
+Ver encargados - get '/encargados'
+
+    {
+    }
+
+Crear encargado - post '/encargado'
+
+    {
+        nombre
+        dni
+        telefono        
+    }
+
+Agregar encargado a centro - post '/centro/agregarEncargado'
+
+    {
+        numeroDeCentro
+        dniDeEncargado
+    }
+
+Eliminar encargado a centro - post '/centro/eliminarEncargado'
+
+    {
+        numeroDeCentro
+    }
+
+/*******************************************************************/
+
+/************************* PROVEEDOR ********************************/
+
+Ver proveedor - get '/proveedor'
+
+    {
+        cuit
+    }
+
+Ver proveedores - get '/proveedores'
+
+    {
+    }
+
+Crear proveedor - post '/proveedor'
+    
+    {
+        razonSocial
+        cuit
+        telefonoSoporte
+    }
+
+/*******************************************************************/
+
+/************************** CONEXION *******************************/
+
+Ver conexion - get '/conexion'
+
+    {
+        numeroDeReferencia
+    }
+
+Ver conexiones - get '/conexiones'
+
+    {
+    }
+
+
+Crear conexion - post '/conexion'
+    
+    {
+        numeroDeReferencia
+        cuitProveedor
+    }
+
+
+Agregar conexion a centro - post '/centro/agregarConexion'
+
+    {
+        numeroDeCentro
+        numeroDeRefenciaDeConexion
+    }
+
+
+Eliminar conexion de centro - post '/centro/eliminarConexion'
+
+    {
+        numeroDeCentro
+    }
+
+/*******************************************************************/
+
+/************************* EQUIPOS *********************************/
+
+Obtener equipo - get '/cpu' '/teclado' '/monitor' '/mouse'
+
+    {
+        numeroDeInventario
+    }
+
+Obtener equipos libres - get '/cpusLibres' '/tecladosLibres' '/monitoresLibres' '/mousesLibres'
+
+    {
+    }
+
+Obtener equipos - get '/cpus' '/teclados' '/monitores' '/mouses'
+
+    {        
+    }
+
+Crear equipo - post '/cpu' '/teclado' '/monitor' '/mouse'
+
+    {
+        marca
+        modelo
+    }
+
+Agregar equipo a puesto - post '/centro/agregarCpu' '/centro/agregarTeclado' '/centro/agregarMonitor' '/centro/agregarMouse'
+
+    {
+        numeroDeCentro
+        numeroDePuesto
+        inventario
+    }
+
+Quitar equipo de puesto - post '/centro/quitarCpu' '/centro/quitarTeclado' '/centro/quitarMonitor' '/centro/quitarMouse'
+
+    {
+        numeroDeCentro
+        numeroDePuesto
+    }
+
+/*******************************************************************/
+    
+
+
