@@ -1,5 +1,5 @@
 const PuestoBuilder = require('../clases/puesto/puestoBuilder')
-const EquipoServicios =require('../servicios/equipoServicios2')
+const EquipoServicios =require('../servicios/equipoServicios')
 const TiposDeEquipos = require('../clases/tipos/tiposDeEquipos')
 const TecladoFactory = require('../clases/equipo/tecladoFactory')
 const MouseFactory = require('../clases/equipo/mouseFactory')

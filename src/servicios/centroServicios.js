@@ -1,13 +1,12 @@
 const RepositorioConexiones = require('../baseDeDatos/repositorios/repositorioConexiones')
 const RepositorioCentros = require('../baseDeDatos/repositorios/repositorioCentros')
-const RepositorioEquipos = require('../baseDeDatos/repositorios/repositorioEquipos')
 const RepositorioEncargados = require('../baseDeDatos/repositorios/repositorioEncargados')
-const CentroPropioBuilder = require('../clases/centro/centroPropioBuilder')
+const CentroBuilder = require('../clases/centro/centroBuilder')
 const ConexionBuilder = require('../clases/conexion/conexionBuilder')
 const EncargadoBuilder = require('../clases/encargado/encargadoBuilder')
 const ConexionServicios = require('./conexionServicios')
 const PuestoServicios = require('./puestoServicios')
-const EquipoServicios = require('./equipoServicios2')
+const EquipoServicios = require('./equipoServicios')
 const EncargadoServicios = require('./encargadoServicios')
 const TiposDeEquipos = require('../clases/tipos/tiposDeEquipos')
 const TecladoFactory = require('../clases/equipo/tecladoFactory')
@@ -15,7 +14,7 @@ const MouseFactory = require('../clases/equipo/mouseFactory')
 const MonitorFactory = require('../clases/equipo/monitorFactory')
 const CpuFactory = require('../clases/equipo/cpuFactory')
 
-module.exports = class CentroPropioServicios{
+module.exports = class CentroServicios{
     constructor(){
         this.centro = null
 
@@ -50,7 +49,7 @@ module.exports = class CentroPropioServicios{
         repositorioEncargados.desconectar()
 
         if(!encargado){
-            throw new Error('No existe encargado con ese numero de referencia')
+            throw new Error('No existe encargado con ese dni')
         }
 
         try{
@@ -69,7 +68,7 @@ module.exports = class CentroPropioServicios{
         const encargado = (new EncargadoServicios).transformarJsonEnEncargado(datos.encargado)
         const puestoServicios = new PuestoServicios
         const puestos = datos.puestos.map(puesto => puestoServicios.transformarJsonEnConexion(puesto))
-        return (new CentroPropioBuilder)
+        return (new CentroBuilder)
                 .setDireccion(datos.direccion)
                 .setNumeroDeCentro(datos.numeroDeCentro)
                 .setEncargado(encargado)
@@ -117,7 +116,7 @@ module.exports = class CentroPropioServicios{
             throw new Error('Ya existe un centro con ese numero')
         }
         try {
-            this.centro = (new CentroPropioBuilder)
+            this.centro = (new CentroBuilder)
                             .setDireccion(datos.direccion)
                             .setNumeroDeCentro(datos.numeroDeCentro)
                             .setEncargado(encargado)
@@ -146,7 +145,7 @@ module.exports = class CentroPropioServicios{
             throw new Error('Ya existe un centro con ese numero')
         }
         try {
-            this.centro = (new CentroPropioBuilder)
+            this.centro = (new CentroBuilder)
                             .setDireccion(datos.direccion)
                             .setNumeroDeCentro(datos.numeroDeCentro)
                             .setEncargado(datos.encargado)
@@ -411,5 +410,13 @@ module.exports = class CentroPropioServicios{
             throw e
         }        
         this.actualizarCentro(centro)    
+    }
+
+    async obtenerCentros(){
+        const repositorioCentros = new RepositorioCentros()
+        await repositorioCentros.conectar()
+        const centros = await repositorioCentros.obtenerTodos()
+        repositorioCentros.desconectar()
+        return centros.map(centro => this.transformarJsonEnCentro(centro))
     }
 }

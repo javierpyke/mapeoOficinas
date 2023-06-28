@@ -1,4 +1,3 @@
-const TiposDeEquipos = require('../../clases/tipos/tiposDeEquipos.js')
 const MongoDBDao = require('../dao/MongoBDDAO.js')
 
 module.exports = class RepositorioEquipos {

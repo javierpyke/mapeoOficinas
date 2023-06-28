@@ -63,7 +63,12 @@ class Equipo{
     }
 
     setInventario(inventario){
-        this.inventario = inventario
+        if(!inventario){
+            throw new Error('Falta Inventario');
+        } else {
+            this.inventario = inventario
+        }
+        
     }
 
     getMarca(){

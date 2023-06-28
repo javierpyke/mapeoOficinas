@@ -27,4 +27,28 @@ module.exports = class CentroBuilder{
         return this
     }
 
+    setConexion(conexion){
+        this.conexion = conexion
+
+        return this
+    }
+
+    setPuestos(puestos){
+        this.puestos = puestos
+        return this
+    }
+
+    setHabilitado(habilitado){
+        this.habilitado = habilitado
+        return this
+    }
+
+    build(){
+        this.centro = new Centro(this.direccion,this.numeroDeCentro)
+        this.centro.setEncargado(this.encargado)
+        this.centro.setConexion(this.conexion)
+        this.centro.setPuestos(this.puestos)
+        this.centro.setHabilitado(this.habilitado)
+        return this.centro
+    }
 }

@@ -7,6 +7,7 @@ Crear centro - post '/centro'
         dniDeEncargado
     }
 
+
 Ver centro - get '/centro'
 
     {
@@ -14,6 +15,24 @@ Ver centro - get '/centro'
     }
 
 
+Ver centros - get '/centros'
+
+    {
+    }
+
+
+Habilitar centro - post '/habilitarCentro'
+
+    {
+        numeroDeCentro
+    }
+
+
+Desabilitar centro - post '/deshabilitarCentro'
+
+    {
+        numeroDeCentro
+    }
 
 /**************************** PUESTO *********************************/
 
@@ -48,17 +67,6 @@ Deshabilitar puesto - post '/centro/deshabilitarPuesto'
 
 /************************* ENCARGADO *******************************/
 
-Ver encargado - get '/encargado'
-
-    {
-        dni
-    }
-
-Ver encargados - get '/encargados'
-
-    {
-    }
-
 Crear encargado - post '/encargado'
 
     {
@@ -66,6 +74,20 @@ Crear encargado - post '/encargado'
         dni
         telefono        
     }
+
+
+Ver encargado - get '/encargado'
+
+    {
+        dni
+    }
+
+
+Ver encargados - get '/encargados'
+
+    {
+    }
+
 
 Agregar encargado a centro - post '/centro/agregarEncargado'
 
@@ -84,6 +106,15 @@ Eliminar encargado a centro - post '/centro/eliminarEncargado'
 
 /************************* PROVEEDOR ********************************/
 
+Crear proveedor - post '/proveedor'
+    
+    {
+        razonSocial
+        cuit
+        telefonoSoporte
+    }
+
+
 Ver proveedor - get '/proveedor'
 
     {
@@ -95,17 +126,17 @@ Ver proveedores - get '/proveedores'
     {
     }
 
-Crear proveedor - post '/proveedor'
-    
-    {
-        razonSocial
-        cuit
-        telefonoSoporte
-    }
-
 /*******************************************************************/
 
 /************************** CONEXION *******************************/
+
+Crear conexion - post '/conexion'
+    
+    {
+        numeroDeReferencia
+        cuitProveedor
+    }
+
 
 Ver conexion - get '/conexion'
 
@@ -116,14 +147,6 @@ Ver conexion - get '/conexion'
 Ver conexiones - get '/conexiones'
 
     {
-    }
-
-
-Crear conexion - post '/conexion'
-    
-    {
-        numeroDeReferencia
-        cuitProveedor
     }
 
 

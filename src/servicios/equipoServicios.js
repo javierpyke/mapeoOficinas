@@ -1,108 +1,75 @@
 const RepositorioEquipos = require('../baseDeDatos/repositorios/repositorioEquipos')
-const TiposDeEquipos = require('../clases/tipos/tiposDeEquipos')
-const TecladoFactory = require('../clases/equipo/tecladoFactory')
-const MouseFactory = require('../clases/equipo/mouseFactory')
 
 module.exports = class EquipoServicios{
-    constructor(){
+    constructor(tipoDeEquipo, factory){
+        this.repositorio = new RepositorioEquipos()
+        this.tipoDeEquipo = tipoDeEquipo
+        this.factory = new factory
     }
 
-    async obtenerEquipos(filtro){
-        const repositorioEquipos = new RepositorioEquipos()
-        await repositorioEquipos.conectar()
-        const equipos = await repositorioEquipos.obtenerTodos(filtro)
-        repositorioEquipos.desconectar()
-        return equipos
+    async obtenerEquiposFiltro(filtro){
+        await this.repositorio.conectar()
+        const equipos = await this.repositorio.obtenerTodos(filtro)
+        this.repositorio.desconectar()
+        return equipos.map(equipo => this.transformarJsonEnEquipo(equipo))
     }
 
-    async obtenerTeclados(){
-        const equipos = await this.obtenerEquipos({'tipoDeEquipo':TiposDeEquipos.Teclado})
-        const teclados = equipos.map(teclado => this.transformarJsonEnTeclado(teclado))
-        return teclados
+    async obtenerEquipos(){
+        return await this.obtenerEquiposFiltro({'tipoDeEquipo':this.tipoDeEquipo})
     }
 
-    async obtenerTecladosLibres(){
-        const equipos = await this.obtenerEquipos({'tipoDeEquipo':TiposDeEquipos.Teclado,'usado':false})
-        const teclados = equipos.map(teclado => this.transformarJsonEnTeclado(teclado))
-        return teclados
+    async obtenerEquiposLibres(){
+        return await this.obtenerEquiposFiltro({'tipoDeEquipo':this.tipoDeEquipo,'usado':false})
     }
 
     async guardar(equipo){
-        const repositorioEquipo = new RepositorioEquipos()
-        await repositorioEquipo.conectar()
-        await repositorioEquipo.agregar(equipo)
-        repositorioEquipo.desconectar()
+        await this.repositorio.conectar()
+        await this.repositorio.agregar(equipo)
+        this.repositorio.desconectar()
     }
 
     async obtenerInventario(){
-        const repositorioEquipo = new RepositorioEquipos()
-        await repositorioEquipo.conectar()
-        const inventario = await repositorioEquipo.obtenerInventario()
-        repositorioEquipo.desconectar()
+        await this.repositorio.conectar()
+        const inventario = await this.repositorio.obtenerInventario()
+        this.repositorio.desconectar()
         return inventario
     }
 
-    async crearTeclado(datos){
-        let teclado = null
+    async crearEquipo(datos){
+        let equipo = null
         const inventario = await this.obtenerInventario()
         try {
-            teclado = (new TecladoFactory).crear(datos.marca,datos.modelo,inventario)
+            equipo = this.factory.crear(datos.marca,datos.modelo,inventario)
         } catch(e){
             throw e
         }        
-        return teclado       
+        return equipo       
     }
 
-    transformarJsonEnTeclado(datos){
+    transformarJsonEnEquipo(datos){
         if(datos){
-            const teclado = (new TecladoFactory).crear(datos.marca,datos.modelo,datos.inventario)
-            teclado.setUsado(datos.usado)
-            return teclado
+            const equipo = this.factory.crear(datos.marca,datos.modelo,datos.inventario)
+            equipo.setUsado(datos.usado)
+            return equipo
         } else {
             return datos
         }   
     }
 
-    transformarJsonEnMouse(datos){
-        if(datos){
-            const mouse = (new MouseFactory).crear(datos.marca,datos.modelo,datos.inventario)
-            mouse.setUsado(datos.usado)
-            return mouse
-        } else {
-            return datos
+    async obtenerEquipo(inventario){
+        await this.repositorio.conectar()
+        const equipo = await this.repositorio.buscar({'inventario':inventario,'tipoDeEquipo':this.tipoDeEquipo})
+        this.repositorio.desconectar()
+        if(!equipo){
+            throw new Error(`No existe ${this.tipoDeEquipo} con ese inventario`)
         }
-        
-    }
-
-    async obtenerEquipo(inventario,tipoDeEquipo){
-        const repositorioEquipos = new RepositorioEquipos()
-        await repositorioEquipos.conectar()
-        const equipo = await repositorioEquipos.buscar({'inventario':inventario,'tipoDeEquipo':tipoDeEquipo})
-        repositorioEquipos.desconectar()
-        return equipo
-    }
-
-    async obtenerTeclado(inventario){
-        const teclado = await this.obtenerEquipo(inventario,TiposDeEquipos.Teclado)
-        if(!teclado){
-            throw new Error('No existe teclado con ese inventario')
-        }
-        return this.transformarJsonEnTeclado(teclado)
-    }
-
-    async obtenerMouse(inventario){
-        const mouse = await this.obtenerEquipo(inventario,TiposDeEquipos.Mouse)
-        if(!mouse){
-            throw new Error('No existe mouse con ese inventario')
-        }
-        return this.transformarJsonEnMouse(mouse)
+        return this.transformarJsonEnEquipo(equipo)
     }
 
     async actualizarEquipo(equipo){
-        const repositorioEquipos = new RepositorioEquipos()
-        await repositorioEquipos.conectar()
-        await repositorioEquipos.actualizar(equipo)
-        repositorioEquipos.desconectar()
+        await this.repositorio.conectar()
+        await this.repositorio.actualizar(equipo)
+        this.repositorio.desconectar()
     }
 
     async equipoEnUso(equipo){

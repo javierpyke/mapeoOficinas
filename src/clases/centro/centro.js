@@ -1,4 +1,4 @@
-const PuestoDeConsulta = require("../puesto/puesto");
+const Puesto = require("../puesto/puesto");
 
 class Centro{
     constructor(direccion,numeroDeCentro){
@@ -73,7 +73,7 @@ class Centro{
     }
 
     crearPuesto(){
-        this.puestos.push(new PuestoDeConsulta())
+        this.puestos.push(new Puesto())
     }
 
     getNumeroDePuesto(puesto){
@@ -226,8 +226,22 @@ class Centro{
     }
 
     getInformacion(){
-        return `Numero de centro: ${this.getNumeroDeCentro()} - Direccion: ${this.getDireccion()} - ${this.getHabilitado()?'HABILITADO':'NO HABILITADO'}`
+        return `Numero de centro: ${this.getNumeroDeCentro()} - Direccion: ${this.getDireccion()} - ${this.getHabilitado()?'HABILITADO':'NO HABILITADO'} - Puestos habilitados: ${this.puestosHabilitados().length}`
+    } 
+    
+    setConexion(conexion){
+        if(!this.conexion){
+            this.conexion = conexion
+            return this
+        } else {
+            throw new Error('El centro ya posee una conexion')
+        }      
     }
+
+    getConexion(){
+        return this.conexion
+    }
+
 }
 
 module.exports = Centro;
