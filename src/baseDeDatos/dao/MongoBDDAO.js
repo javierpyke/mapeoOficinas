@@ -8,21 +8,21 @@ module.exports = class MongoDBDao {
 
         // Database Name
         this.dbName = 'mapeoDeOficinas';
-        this.collection = collection;
+        this.collectionName = collection;
       }
     
       async conectar() {
         try {
           await this.client.connect()
           this.db = this.client.db(this.dbName)
-          this.collection2 = this.db.collection(this.collection)
+          this.collection = this.db.collection(this.collectionName)
         } catch (e) {
           console.log("No se pudo conectar a MongoDB")
         }
       }
 
       async agregar(objeto){
-        await this.collection2.insertOne(objeto)
+        await this.collection.insertOne(objeto)
       }
 
       desconectar(){
@@ -30,28 +30,22 @@ module.exports = class MongoDBDao {
       }
     
       async obtenerTodos(filtro) {
-        const findResult = await this.collection2.find(filtro).toArray();
+        const findResult = await this.collection.find(filtro).toArray();
         return findResult;
       }
 
       async obtener(filtro) {
-        /*const findResult = {}
-        try{
-            findResult = await collection.find().toArray();
-        } catch(e){
-            console.log("no")
-        }*/
-        const findResult = await this.collection2.find(filtro).toArray();
+        const findResult = await this.collection.find(filtro).toArray();
         return findResult[0];
       }
 
       async obtenerInventario(){
-        const ultimoEquipo = await this.collection2.find().sort({$natural:-1}).limit(1).toArray();
+        const ultimoEquipo = await this.collection.find().sort({$natural:-1}).limit(1).toArray();
         return ultimoEquipo[0].inventario + 1
       }
 
       async actualizar(llave,objeto){
-        await this.collection2.updateOne(llave,{$set:objeto})
+        await this.collection.updateOne(llave,{$set:objeto})
       }
     }
 
