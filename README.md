@@ -8,7 +8,7 @@ Todos equipos informáticos cuentan con marca, modelo y un inventario propio del
 * Un CENTRO puede tener solo un ENCARGADO y un ENCARGADO puede tener a cargo varios CENTROS
 * Un CENTRO tiene una CONEXION y una CONEXION puede estar en varios CENTROS
 * Un CENTRO tiene varios PUESTOS
-    * Un PUESTO para poder habilitarse necesita tener un TECLADO, un MOUSE, una CPU Y un MONITOR. Si un PUESTO esta HABILITADO y se le quita algun EQUIPO para a estar NO HABILITADO
+    * Un PUESTO para poder habilitarse necesita tener un TECLADO, un MOUSE, una CPU Y un MONITOR. Si un PUESTO esta HABILITADO y se le quita algun EQUIPO pasa a estar NO HABILITADO
     * Un PUESTO puede tener un solo EQUIPO de cada tipo y un EQUIPO puede estar en un solo PUESTO
 * Para poder habilitar un CENTRO tiene que tener al menos algun PUESTO HABILITADO, un ENCARGADO y una CONEXION. Si el CENTRO esta HABILITADO y se le quita algun requisito pasa a estar NO HABILITADO.
 
