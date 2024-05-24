@@ -18,6 +18,7 @@ Todos equipos informáticos cuentan con marca, modelo y un inventario propio del
 #Para crear un ENCARGADO se necesita nombre, dni y telefono.
 
 #Para crear una CONEXION se necesita un numero de referencia y un PROVEEDOR (que este en la base de datos)
+
 *  Una CONEXION tiene un PROVEEDOR y un PROVEEDOR puede estar en varias CONEXIONES.
 
 Para crear un PROVEEDOR se necesita razon social, cuit y telefono de soporte.
